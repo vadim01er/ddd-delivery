@@ -3,14 +3,18 @@ package ru.ershov.ddd.delivery.core.domain.shared.kernel
 import kotlin.math.abs
 import kotlin.random.Random
 
+private const val MIN_VALUE = 1
+private const val MAX_VALUE = 10
+
+// Value Object
 data class Location(
     val x: Int,
     val y: Int
 ) {
 
     init {
-        require(x in 1..10) { "Value X should be within the boundaries from 0 to 9" }
-        require(y in 1..10) { "Value Y should be within the boundaries from 0 to 9" }
+        require(x in MIN_VALUE..MAX_VALUE) { "Value X should be within the boundaries from 1 to 10" }
+        require(y in MIN_VALUE..MAX_VALUE) { "Value Y should be within the boundaries from 1 to 10" }
     }
 
 
@@ -22,8 +26,8 @@ data class Location(
 
     companion object {
         fun random(): Location {
-            val x = Random.nextInt(0, 10)
-            val y = Random.nextInt(0, 10)
+            val x = Random.nextInt(0, MAX_VALUE)
+            val y = Random.nextInt(0, MAX_VALUE)
             return Location(x, y)
         }
     }
