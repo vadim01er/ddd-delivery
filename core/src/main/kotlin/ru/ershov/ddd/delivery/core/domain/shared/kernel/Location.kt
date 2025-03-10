@@ -13,8 +13,8 @@ data class Location(
 ) {
 
     init {
-        require(x in MIN_VALUE..MAX_VALUE) { "Value X should be within the boundaries from 1 to 10" }
-        require(y in MIN_VALUE..MAX_VALUE) { "Value Y should be within the boundaries from 1 to 10" }
+        require(x in MIN_VALUE..MAX_VALUE) { "Value X should be within the boundaries from $MIN_VALUE to $MAX_VALUE" }
+        require(y in MIN_VALUE..MAX_VALUE) { "Value Y should be within the boundaries from $MIN_VALUE to $MAX_VALUE" }
     }
 
 
