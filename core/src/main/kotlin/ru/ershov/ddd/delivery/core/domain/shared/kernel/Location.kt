@@ -26,8 +26,8 @@ data class Location(
 
     companion object {
         fun random(): Location {
-            val x = Random.nextInt(0, MAX_VALUE)
-            val y = Random.nextInt(0, MAX_VALUE)
+            val x = Random.nextInt(MIN_VALUE, MAX_VALUE)
+            val y = Random.nextInt(MIN_VALUE, MAX_VALUE)
             return Location(x, y)
         }
     }
