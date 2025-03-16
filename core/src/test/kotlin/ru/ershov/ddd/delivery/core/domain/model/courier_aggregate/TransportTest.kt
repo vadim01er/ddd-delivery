@@ -1,11 +1,14 @@
-package ru.ershov.ddd.delivery.core.domain.model.courier
+package ru.ershov.ddd.delivery.core.domain.model.courier_aggregate
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.MethodSource
+import ru.ershov.ddd.delivery.core.domain.model.order_aggregate.Order
+import ru.ershov.ddd.delivery.core.domain.model.order_aggregate.OrderStatus
 import ru.ershov.ddd.delivery.core.domain.shared.kernel.Location
+import java.util.*
 import java.util.stream.Stream
 
 class TransportTest {

@@ -1,4 +1,4 @@
-package ru.ershov.ddd.delivery.core.domain.model.courier
+package ru.ershov.ddd.delivery.core.domain.model.courier_aggregate
 
 import ru.ershov.ddd.delivery.core.domain.shared.kernel.Location
 import java.util.UUID
@@ -8,18 +8,22 @@ const val MIN_SPEED = 1
 const val MAX_SPEED = 3
 
 
-class Transport private constructor(
-    val id: UUID,
-    var name: String,
-    var speed: Int
-) {
+class Transport {
 
-    init {
+    val id: UUID
+
+    var name: String
+        private set
+    var speed: Int
+        private set
+
+    constructor(name: String, speed: Int) {
         require(name.isNotBlank()) { "Value name shouldn't be blank" }
         require(speed in MIN_SPEED..MAX_SPEED) { "Value speed should be within the boundaries from $MIN_SPEED to $MAX_SPEED" }
+        this.id = UUID.randomUUID()
+        this.name = name
+        this.speed = speed
     }
-
-    constructor(name: String, speed: Int) : this(UUID.randomUUID(), name, speed)
 
     fun move(current: Location, target: Location): Location {
         val dx = (target.x - current.x).coerceIn(-speed, speed)
