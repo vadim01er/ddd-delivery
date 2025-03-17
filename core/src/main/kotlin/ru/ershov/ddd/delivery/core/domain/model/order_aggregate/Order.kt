@@ -21,9 +21,6 @@ class Order {
 
     fun assignCourier(courier: Courier) {
         require(status == OrderStatus.CREATED) { "Order must be in ${OrderStatus.CREATED} status" }
-        val order: Order? = null
-        order?.status = OrderStatus.CREATED
-
         courierId = courier.id
         status = OrderStatus.ASSIGNED
     }
