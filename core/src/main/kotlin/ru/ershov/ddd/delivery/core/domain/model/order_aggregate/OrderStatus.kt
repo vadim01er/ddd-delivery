@@ -1,17 +1,19 @@
-package ru.ershov.ddd.delivery.core.domain.model.courier
+package ru.ershov.ddd.delivery.core.domain.model.order_aggregate
 
-class CourierStatus private constructor(val name: String){
+
+class OrderStatus private constructor(val name: String) {
 
     companion object {
-        val FREE = CourierStatus("FREE")
-        val BUSY = CourierStatus("BUSY")
+        val CREATED = OrderStatus("CREATED")
+        val ASSIGNED = OrderStatus("ASSIGNED")
+        val COMPLETED = OrderStatus("COMPLETED")
     }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as CourierStatus
+        other as OrderStatus
 
         return name == other.name
     }
