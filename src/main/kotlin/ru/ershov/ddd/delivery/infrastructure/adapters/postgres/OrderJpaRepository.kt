@@ -11,6 +11,5 @@ interface OrderJpaRepository: JpaRepository<Order, UUID> {
 
     fun findFirstByStatusIs(status: OrderStatus): Order?
 
-
     fun findAllByStatus(status: OrderStatus): List<Order>
 }

@@ -1,0 +1,3 @@
+package ru.ershov.ddd.delivery.core.application.queries.get_created_and_assigned_orders
+
+class GetCreatedAndAssignedOrdersRequest
