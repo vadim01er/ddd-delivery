@@ -1,0 +1,7 @@
+# OpenAPI Generator Ignore
+# Игнорируем ВСЁ, кроме apis/ и models/ (или dto/)
+**
+!**/apis/**
+!**/models/**
+!**/dto/**
+
