@@ -9,7 +9,7 @@ import java.util.*
 import kotlin.jvm.optionals.getOrNull
 
 @Component
-class OrderRepository(
+internal class OrderRepository(
     private val orderJpaRepository: OrderJpaRepository
 ): IOrderRepository {
     override fun add(order: Order): Order =

@@ -8,7 +8,7 @@ import java.util.*
 import kotlin.jvm.optionals.getOrNull
 
 @Component
-class CourierRepository(
+internal class CourierRepository(
     private val courierJpaRepository: CourierJpaRepository
 ): ICourierRepository {
     override fun add(courier: Courier): Courier =

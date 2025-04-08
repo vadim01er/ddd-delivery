@@ -12,20 +12,16 @@ import ru.ershov.ddd.delivery.core.domain.services.DispatchService
 import ru.ershov.ddd.delivery.core.domain.shared.kernel.Location
 import java.util.*
 
-@SpringBootTest
-@ActiveProfiles("dev")
 class DispatchServiceTest {
 
-    @Autowired
-    lateinit var dispatchService: DispatchService
+    private var dispatchService: IDispatchService = DispatchService()
 
-    val order = Order(UUID.randomUUID(), Location(10, 10))
+    private val order = Order(UUID.randomUUID(), Location(10, 10))
 
     @Test
     fun `chooseCourier throw exception when empty list of couriers`() {
         assertThrows(RuntimeException::class.java) { dispatchService.chooseCourier(order, listOf()) }
     }
-
 
     @Test
     fun `chooseCourier return correct courier when not empty list of couriers`() {
