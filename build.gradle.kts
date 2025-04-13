@@ -1,3 +1,5 @@
+import com.google.protobuf.gradle.id
+
 plugins {
     kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "1.9.25"
@@ -5,6 +7,7 @@ plugins {
     id("org.springframework.boot") version "3.4.3"
     id("io.spring.dependency-management") version "1.1.7"
     id("org.openapi.generator") version "7.12.0"
+    id("com.google.protobuf") version "0.9.5"
 }
 
 group = "ru.ershov.ddd.delivery"
@@ -16,8 +19,16 @@ java {
     }
 }
 
+
+
 repositories {
     mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.grpc:spring-grpc-dependencies:0.6.0")
+    }
 }
 
 dependencies {
@@ -26,6 +37,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6")
+    implementation("org.springframework.grpc:spring-grpc-spring-boot-starter")
+    implementation("com.google.protobuf:protobuf-java:4.30.2")
+//    implementation("io.projectreactor:reactor-core:3.7.4")
+//    implementation("javax.annotation:javax.annotation-api:1.3.2")
+//    implementation("com.salesforce.servicelibs:reactor-grpc-stub:1.2.4")
 
     implementation("org.postgresql:postgresql")
     implementation("org.testcontainers:postgresql")
@@ -35,6 +51,8 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testImplementation("com.salesforce.servicelibs:reactor-grpc-stub:1.2.4")
+
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
@@ -56,10 +74,38 @@ tasks {
 
 sourceSets {
     main {
+        proto {
+            srcDir("src/main/kotlin/ru/ershov/ddd/delivery/infrastructure/adapters/grpc")
+            include("**/*.proto")
+        }
         java {
             srcDir("${project.buildDir}/generated/openapi")
         }
     }
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:4.30.2"
+    }
+
+    plugins {
+        id("grpc") {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.71.0"
+        }
+    }
+
+    generateProtoTasks {
+        all().forEach {
+            it.plugins {
+                id("grpc") {
+                    option("jakarta_omit")
+                    option("@generated=omit")
+                }
+            }
+        }
+    }
+
 }
 
 openApiGenerate {
