@@ -12,6 +12,7 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import ru.ershov.ddd.delivery.core.domain.model.order_aggregate.Order
 import ru.ershov.ddd.delivery.core.domain.shared.kernel.Location
+import ru.ershov.ddd.delivery.core.ports.IGeoClient
 import ru.ershov.ddd.delivery.core.ports.IOrderRepository
 import java.util.*
 
@@ -21,6 +22,8 @@ class CreateOrderHandlerTest {
 
     @Mock
     lateinit var orderRepository: IOrderRepository
+    @Mock
+    lateinit var iGeoClient: IGeoClient
 
     @InjectMocks
     lateinit var handler: CreateOrderHandler
@@ -36,6 +39,9 @@ class CreateOrderHandlerTest {
 
     @Test
     fun `created order SUCCESS`() {
+        whenever(iGeoClient.getBy(any()))
+            .thenReturn(Location.random())
+
         val basketId = UUID.randomUUID()
         handler.handle(CreateOrderCommand(basketId, "address"))
 
