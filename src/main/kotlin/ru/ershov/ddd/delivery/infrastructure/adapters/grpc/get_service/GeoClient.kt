@@ -12,7 +12,6 @@ class GeoClient(
 ) : IGeoClient {
 
     override fun getBy(address: String): Location {
-        println(geoStub.channel.toString())
         return geoStub.getGeolocation(
             GeoContract.GetGeolocationRequest.newBuilder()
                 .setStreet(address)

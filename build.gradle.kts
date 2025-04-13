@@ -36,12 +36,16 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6")
+
     implementation("org.springframework.grpc:spring-grpc-spring-boot-starter")
+
+    implementation("org.springframework.kafka:spring-kafka")
+
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6")
+
     implementation("com.google.protobuf:protobuf-java:4.30.2")
-//    implementation("io.projectreactor:reactor-core:3.7.4")
-//    implementation("javax.annotation:javax.annotation-api:1.3.2")
-//    implementation("com.salesforce.servicelibs:reactor-grpc-stub:1.2.4")
+    implementation("com.hubspot.jackson:jackson-datatype-protobuf:0.9.17")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-protobuf:2.18.3")
 
     implementation("org.postgresql:postgresql")
     implementation("org.testcontainers:postgresql")
@@ -76,6 +80,7 @@ sourceSets {
     main {
         proto {
             srcDir("src/main/kotlin/ru/ershov/ddd/delivery/infrastructure/adapters/grpc")
+            srcDir("src/main/kotlin/ru/ershov/ddd/delivery/api/adapters/kafka")
             include("**/*.proto")
         }
         java {
