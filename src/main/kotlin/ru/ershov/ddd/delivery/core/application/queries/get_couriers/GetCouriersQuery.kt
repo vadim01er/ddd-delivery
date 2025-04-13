@@ -13,7 +13,7 @@ class GetCouriersQuery(
 ) {
 
     fun query(getCouriersRequest: GetCouriersRequest): GetCouriersResponse {
-        return courierRepository.findByStatusIs(CourierStatus.BUSY)
+        return courierRepository.findAll()
             .map { it.toResponseCourier() }
             .let { GetCouriersResponse(it) }
     }
