@@ -1,0 +1,32 @@
+syntax = "proto3";
+package BasketConfirmed;
+
+option go_package = "queues/basketconfirmedpb";
+
+message BasketConfirmedIntegrationEvent {
+  string BasketId = 1;
+  Address Address = 2;
+  repeated Item Items = 3;
+  DeliveryPeriod DeliveryPeriod = 4;
+}
+
+message Address {
+  string Country = 1;
+  string City = 2;
+  string Street = 3;
+  string House = 4;
+  string Apartment = 5;
+}
+
+message Item {
+  string Id = 1;
+  string GoodId = 2;
+  string Title = 3;
+  double Price = 4;
+  int32 Quantity = 5;
+}
+
+message DeliveryPeriod {
+  int32 From = 1;
+  int32 To = 2;
+}
